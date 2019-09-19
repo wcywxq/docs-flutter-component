@@ -87,9 +87,12 @@ description: flutter 相关组件的介绍
 >
 > _**介绍**_：这些具有弹性空间的布局类_**Widget**_可让您在水平（_**Row**_）和垂直（_**Column**_）方向上创建灵活的布局。
 >
-> ​ _**Row**_：要使子项扩展以填充可用的水平空间，请将子项包装在[_**Expanded**_](https://api.flutter.dev/flutter/widgets/Expanded-class.html)小部件中。_**Row**_ 窗口小部件不会滚动，如果想要滚动，请使用 [_**ListView**_](https://api.flutter.dev/flutter/widgets/ListView-class.html)。
+> * _**Row**_：要使子项扩展以填充可用的水平空间，请将子项包装在[_**Expanded**_](https://api.flutter.dev/flutter/widgets/Expanded-class.html)小部件中。_**Row**_ 窗口小部件不会滚动，如果想要滚动，请使用 [_**ListView**_](https://api.flutter.dev/flutter/widgets/ListView-class.html)。
+> * _**Column**_：要使子项扩展以填充可用的垂直空间，请将子项包装在[_**Expanded**_](https://api.flutter.dev/flutter/widgets/Expanded-class.html)小部件中。_**Column**_ 窗口小部件不会滚动，如果想要滚动，请使用 [_**ListView**_](https://api.flutter.dev/flutter/widgets/ListView-class.html)。
 >
-> ​ _**Column**_：要使子项扩展以填充可用的垂直空间，请将子项包装在[_**Expanded**_](https://api.flutter.dev/flutter/widgets/Expanded-class.html)小部件中。_**Column**_ 窗口小部件不会滚动，如果想要滚动，请使用 [_**ListView**_](https://api.flutter.dev/flutter/widgets/ListView-class.html)。
+> ​
+>
+>
 >
 > _**例子：**_
 >
