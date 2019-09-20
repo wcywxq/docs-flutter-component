@@ -23,7 +23,9 @@
 
 ## Layout布局
 
-* [Layout布局](layout-bu-ju/layout-bu-ju.md)
+* [Layout布局](layout-bu-ju/layout-bu-ju/README.md)
+  * [2. 拥有多个子元素的布局widget](layout-bu-ju/layout-bu-ju/2.-yong-you-duo-ge-zi-yuan-su-de-bu-ju-widget.md)
+  * [1. 拥有单个子元素的布局widget](layout-bu-ju/layout-bu-ju/1.-yong-you-dan-ge-zi-yuan-su-de-bu-ju-widget.md)
 
 ## Text文本
 
