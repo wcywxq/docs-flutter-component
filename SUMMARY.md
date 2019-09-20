@@ -10,7 +10,12 @@
 ## Material组件
 
 * [Material组件](material-zu-jian/material-zu-jian/README.md)
-  * [App结构和导航](material-zu-jian/material-zu-jian/app-jie-gou-he-dao-hang.md)
+  * [6. 布局](material-zu-jian/material-zu-jian/6.-bu-ju.md)
+  * [5. 信息展示](material-zu-jian/material-zu-jian/5.-xin-xi-zhan-shi.md)
+  * [4. 对话框、Alert、Panel](material-zu-jian/material-zu-jian/4.-dui-hua-kuang-alertpanel.md)
+  * [3. 输入框和选择框](material-zu-jian/material-zu-jian/3.-shu-ru-kuang-he-xuan-ze-kuang.md)
+  * [2. 按钮](material-zu-jian/material-zu-jian/2.-an-niu.md)
+  * [1. App结构和导航](material-zu-jian/material-zu-jian/app-jie-gou-he-dao-hang.md)
 
 ## Cupertino\(iOS风格的组件\)
 
