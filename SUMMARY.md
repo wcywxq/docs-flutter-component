@@ -9,7 +9,8 @@
 
 ## Material组件
 
-* [Material组件](material-zu-jian/material-zu-jian.md)
+* [Material组件](material-zu-jian/material-zu-jian/README.md)
+  * [App结构和导航](material-zu-jian/material-zu-jian/app-jie-gou-he-dao-hang.md)
 
 ## Cupertino\(iOS风格的组件\)
 
