@@ -8,7 +8,7 @@ description: flutter中最基本的组件
 
 ## **2. Row 组件**
 
-_**说明**_： 其设计是基于_**web**_开发中的 _**Flexbox**_ 布局模型。
+_**说明**_： 其设计是基于_**web**_ 开发中的 _**Flexbox**_ 布局模型。
 
 _**介绍**_：_**Row**_  可以在水平方向排列其子_**widget**_。
 
@@ -73,7 +73,36 @@ _**例子：**_
 > )
 > ```
 
-## 3. Column 组件
+## 3. Column 组件 
+
+_**说明**_： 其设计是基于_**web**_ 开发中的 _**Flexbox**_ 布局模型。
+
+_**介绍**_：_**Column**_  可以在垂直方向排列其子_**widget**_。
+
+* 如果想要将子项自适应所剩余的空间，则需要包装在 _**Expanded  组件**_ 中（类似于 _**css 弹性盒模型**_）。_**Column**_ 组件不会滚动，如果想要滚动，请使用 _**ListView 组件**_。
+
+_**例子:**_
+
+```dart
+const Column({
+    // 类似 React 组件中的 key
+    Key key;
+    // 如何将子项放在主轴上，默认为行的左侧或列的顶部
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start;   
+    // 主轴占用的空间，默认为最大
+    MainAxisSize mainAxisSize = MainAxisSize.max;    
+    // 十字轴上的排列方式
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center;
+    // 用作主轴的方向
+    TextDirection textDirection;
+    // 垂直放置的顺序
+    VerticalDirection verticalDirection = VerticalDirection.down;
+    // 对其哪个基线
+    TextBaseline textBaseline;
+    // 子部件
+    List<Widget> children = const <Widget>[];    
+})
+```
 
 ## 4. Image 组件
 
