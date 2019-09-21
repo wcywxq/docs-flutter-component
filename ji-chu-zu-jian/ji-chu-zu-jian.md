@@ -57,20 +57,6 @@ _**例子：**_
 >     ),
 >   ],
 > )
->     
-> /// 此示例使用Column垂直排列三个小部件，最后一个小部件用于填充所有剩余空间。
-> Column(
->   children: <Widget>[
->     Text('Deliver features faster'),
->     Text('Craft beautiful UIs'),
->     Expanded(
->       child: FittedBox(
->         fit: BoxFit.contain, // otherwise the logo will be tiny
->         child: const FlutterLogo(),
->       ),
->     ),
->   ],
-> )
 > ```
 
 ## 3. Column 组件 
@@ -81,7 +67,7 @@ _**介绍**_：_**Column**_  可以在垂直方向排列其子_**widget**_。
 
 * 如果想要将子项自适应所剩余的空间，则需要包装在 _**Expanded  组件**_ 中（类似于 _**css 弹性盒模型**_）。_**Column**_ 组件不会滚动，如果想要滚动，请使用 _**ListView 组件**_。
 
-_**例子:**_
+_**属性：**_
 
 ```dart
 const Column({
@@ -102,6 +88,24 @@ const Column({
     // 子部件
     List<Widget> children = const <Widget>[];    
 })
+```
+
+_**例子:**_
+
+```dart
+/// 此示例使用Column垂直排列三个小部件，最后一个小部件用于填充所有剩余空间。
+Column(
+  children: <Widget>[
+    Text('Deliver features faster'),
+    Text('Craft beautiful UIs'),
+    Expanded(
+      child: FittedBox(
+        fit: BoxFit.contain, // otherwise the logo will be tiny
+        child: const FlutterLogo(),
+      ),
+    ),
+  ],
+)
 ```
 
 ## 4. Image 组件
