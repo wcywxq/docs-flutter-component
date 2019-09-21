@@ -8,6 +8,54 @@ description: flutter中最基本的组件
 
 ## **2. Row 组件**
 
+_**说明**_： 其设计是基于_**web**_开发中的 _**Flexbox**_ 布局模型。
+
+_**介绍**_：_**Row**_  可以在水平方向排列其子_**widget**_。
+
+* 如果想要将子项自适应所剩余的空间，则需要包装在 _**Expanded  组件**_ 中（类似于 _**css 弹性盒模型**_）。_**Row**_ 组件不会滚动，如果想要滚动，请使用 _**ListView 组件**_。
+
+_**属性：**_
+
+| 属性名 | 类型 | 含义 |
+| :--- | :--- | :--- |
+|  |  |  |
+
+_**例子：**_
+
+> ```dart
+> /// 此示例将可用空间划分为三个（水平），并将文本放在前两个单元格中心，将Flutter徽标放在第三个中心：
+> Row(
+>   children: <Widget>[
+>     Expanded(
+>       child: Text('Deliver features faster', textAlign: TextAlign.center),
+>     ),
+>     Expanded(
+>       child: Text('Craft beautiful UIs', textAlign: TextAlign.center),
+>     ),
+>     Expanded(
+>       child: FittedBox(
+>         fit: BoxFit.contain, // otherwise the logo will be tiny
+>         child: const FlutterLogo(),
+>       ),
+>     ),
+>   ],
+> )
+>     
+> /// 此示例使用Column垂直排列三个小部件，最后一个小部件用于填充所有剩余空间。
+> Column(
+>   children: <Widget>[
+>     Text('Deliver features faster'),
+>     Text('Craft beautiful UIs'),
+>     Expanded(
+>       child: FittedBox(
+>         fit: BoxFit.contain, // otherwise the logo will be tiny
+>         child: const FlutterLogo(),
+>       ),
+>     ),
+>   ],
+> )
+> ```
+
 ## 3. Column 组件
 
 ## 4. Image 组件
@@ -16,25 +64,28 @@ description: flutter中最基本的组件
 
 _**说明**_：该 _**widget**_ 可让创建一个带格式的文本。
 
-_**介绍**_：_**Text 组件**_显示一个样式单一的文本字符串。根据布局约束，字符串可能跨多行显示，也可能全部显示在同一行上。
+_**介绍**_：_**Text 组件**_ 显示一个样式单一的文本字符串。根据布局约束，字符串可能跨多行显示，也可能全部显示在同一行上。
 
-_**常用属性**_：
+_**属性**_：
 
-> | 属性名 | 类型 | 含义 |
-> | :--- | :--- | :--- |
-> | _**data**_ | _**String**_ | 要显示的文本（位于第一个参数） |
-> | _**locale**_ | _**Locale**_ | 设置语言环境  就是国际化，多语言支持 |
-> | _**maxLines**_ | _**int**_ | 显示文本的最大行数 |
-> | _**overflow**_ | _**TextOverflow**_ | 用来处理文本溢出 |
-> | _**semanticsLabel**_ | _**String**_ | 该文本的另一种语义标签 |
-> | _**softWrap**_ | _**bool**_ | 文本是否应该在换行符处断行 |
-> | _**strutStyle**_ | _**StrutStyle**_ | 支撑样式 |
-> | _**style**_ | _**TextStyle**_ | 文本样式 |
-> | _**textAlign**_ | _**TextAlign**_ | 文本水平对齐方式 |
-> | _**textDirection**_ | _**TextDirection**_ | 文本显示的方向 |
-> | _**textScaleFactor**_ | _**double**_ | 每个逻辑像素的字体像素值 |
-> | _**textWidthBasis**_ | _**TextWidthBasis**_ | 设置空值 |
-> | _**Key**_ | _**Key**_ | 类似于 _**react**_ 组件中的 _**key**_ |
+```dart
+const Text(
+    String data; // 要显示的文本
+    {
+        Locale locale; // 设置语言环境，就是国际化，多语言支持
+        int maxLines; // 显示文本的最大行数
+        TextOverflow overflow; // 用来处理文本溢出
+        String semanticsLabel; // 该文本的另一种语义标签
+        bool softWrap; // 文本是否应该在换行符处断行 
+        StrutStyle strutStyle; // 支撑样式
+        TextStyle style； // 文本样式
+        TextDirection textDirection; // 文本显示的方向
+        double textScaleFactor; // 每个逻辑像素的字体像素值
+        TextWidthBasis textWidthBasis; // 设置空值
+        Key key; // 类似于 react 组件中的 key           
+    }
+)
+```
 
 _**例子：**_
 
@@ -56,14 +107,15 @@ _**介绍**_：_**TextSpan**_ 需要套一层 _**`Text.rich`**_，可以有`chil
 
 _**属性：**_
 
-> | 属性 | 类型 | 含义 |
-> | :--- | :--- | :--- |
-> | _**children**_ | _**List**_ | _**children**_ 子集，同为 _**TextSpan**_ |
-> | _**recognizer**_ | _**GestureRecognizer**_ | 一个手势识别器，它将接收达到此范围的事件。 |
-> | _**semanticsLabel**_ | _**String**_ | 此 _**TextSpan**_ 的替代语义标签 |
-> | _**span**_ | _**String**_ | 文本内容 |
-> | _**style**_ | _**TextStyle**_ | 要应用于此范围内的 _**TextStyle**_ 样式 |
-> | _**runtimeType**_ | _**Type**_ | 表示对象的运行时类型。 |
+```dart
+const TextSpan({
+    String text; // 要显示的内容
+    List children; // 子部件，同为 TextSpan
+    TextStyle style; // 要应用于此范围内的 TextStyle 样式
+    GestureRecognizer recognizer; // 一个手势识别器，它将接收达到此范围的事件。
+    String semanticsLabel; // 此 TextSpan 的替代语义标签
+})
+```
 
 _**例子**_：
 
