@@ -10,12 +10,12 @@ _**说明**_： 由于 _**Container**_ 组合了许多其他小部件，每个�
 
 _**介绍**_： _**Container**_ 是一个组合类容器，它是由常见的 _**绘画**_，_**定位**_ 和 _**尺寸调整**_ 等相关组件所组成的一个多功能容器，所以我们只需通过一个 _**Container**_ 组件可以实现同时需要 _**装饰**_、_**变换**_、_**限制**_ 的场景。
 
-_**注意**_:
+_**注意**_：
 
 *  容器的大小可以通过 `width`、`height` 属性来指定，也可以通过`constraints` 来指定；如果它们同时存在时，`width`、`height` 优先。实际上 _**Container**_ 内部会根据 `width`、`height` 来生成一个 `constraints`。
 * `color` 和 `decoration` 是互斥的，如果同时设置它们则会报错！实际上，当指定 `color` 时，_**Container**_ 内会自动创建一个decoration。
 
-_**属性：**_
+_**属性**_：
 
 ```dart
 const Container({
@@ -34,6 +34,36 @@ const Container({
 })
 ```
 
+_**例子**_：
+
+```dart
+/// 此示例显示了一个 48x48 的琥珀色正方形，放置在 Center 组件内，以免造成其它影响
+Center(
+  child: Container(
+    margin: const EdgeInsets.all(10.0),
+    color: Colors.amber[600],
+    width: 48.0,
+    height: 48.0,
+  ),
+)
+
+/// 展示了 Container 的一些功能，显示的是一个旋转的矩形，矩形的中心是一个 Hello World
+Container(
+  constraints: BoxConstraints.expand(
+    height: Theme.of(context).textTheme.display1.fontSize * 1.1 + 200.0,
+  ),
+  padding: const EdgeInsets.all(8.0),
+  color: Colors.blue[600],
+  alignment: Alignment.center,
+  child: Text('Hello World',
+    style: Theme.of(context)
+        .textTheme
+        .display1
+        .copyWith(color: Colors.white)),
+  transform: Matrix4.rotationZ(0.1),
+)
+```
+
 ## **2. Row 组件**
 
 _**说明**_： 其设计是基于_**web**_ 开发中的 _**Flexbox**_ 布局模型。
@@ -42,7 +72,7 @@ _**介绍**_：_**Row**_  可以在水平方向排列其子_**widget**_。
 
 * 如果想要将子项自适应所剩余的空间，则需要包装在 _**Expanded  组件**_ 中（类似于 _**css 弹性盒模型**_）。_**Row**_ 组件不会滚动，如果想要滚动，请使用 _**ListView 组件**_。
 
-_**属性：**_
+_**属性**_：
 
 ```dart
 const Row({
@@ -65,27 +95,27 @@ const Row({
 })
 ```
 
-_**例子：**_
+_**例子**_：
 
-> ```dart
-> /// 此示例将可用空间划分为三个（水平），并将文本放在前两个单元格中心，将Flutter徽标放在第三个中心：
-> Row(
->   children: <Widget>[
->     Expanded(
->       child: Text('Deliver features faster', textAlign: TextAlign.center),
->     ),
->     Expanded(
->       child: Text('Craft beautiful UIs', textAlign: TextAlign.center),
->     ),
->     Expanded(
->       child: FittedBox(
->         fit: BoxFit.contain, // otherwise the logo will be tiny
->         child: const FlutterLogo(),
->       ),
->     ),
->   ],
-> )
-> ```
+```dart
+/// 此示例将可用空间划分为三个（水平），并将文本放在前两个单元格中心，将Flutter徽标放在第三个中心：
+Row(
+  children: <Widget>[
+    Expanded(
+      child: Text('Deliver features faster', textAlign: TextAlign.center),
+    ),
+    Expanded(
+      child: Text('Craft beautiful UIs', textAlign: TextAlign.center),
+    ),
+    Expanded(
+      child: FittedBox(
+        fit: BoxFit.contain, // otherwise the logo will be tiny
+        child: const FlutterLogo(),
+      ),
+    ),
+  ],
+)
+```
 
 ## 3. Column 组件 
 
@@ -95,7 +125,7 @@ _**介绍**_：_**Column**_  可以在垂直方向排列其子_**widget**_。
 
 * 如果想要将子项自适应所剩余的空间，则需要包装在 _**Expanded  组件**_ 中（类似于 _**css 弹性盒模型**_）。_**Column**_ 组件不会滚动，如果想要滚动，请使用 _**ListView 组件**_。
 
-_**属性：**_
+_**属性**_：
 
 ```dart
 const Column({
@@ -118,7 +148,7 @@ const Column({
 })
 ```
 
-_**例子:**_
+_**例子**_：
 
 ```dart
 /// 此示例使用Column垂直排列三个小部件，最后一个小部件用于填充所有剩余空间。
@@ -166,17 +196,17 @@ const Text(
 )
 ```
 
-_**例子：**_
+_**例子**_：
 
-> ```dart
-> /// 这个例子展示了如何使用文本小部件显示文本。如果文本溢出，则使用省略号截断文本。
-> Text(
->     'Hello, $_name! How are you?',
->     textAlign: TextAlign.center,
->     overflow: TextOverflow.ellipsis,
->     style: TextStyle(fontWeight: FontWeight.bold),
-> )
-> ```
+```dart
+/// 这个例子展示了如何使用文本小部件显示文本。如果文本溢出，则使用省略号截断文本。
+Text(
+    'Hello, $_name! How are you?',
+    textAlign: TextAlign.center,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(fontWeight: FontWeight.bold),
+)
+```
 
 ### _**5.1 TextSpan组件（类似于 &lt;span&gt;）**_
 
@@ -184,7 +214,7 @@ _**说明**_：类似于 _**html**_ 中的 _**span**_，将文字放在一行。
 
 _**介绍**_：_**TextSpan**_ 需要套一层 _**`Text.rich`**_，可以有`children`，`children`同为 _**TextSpan**_，可以分别加不同的样式，这里只能加样式，不可以加其他的属性。
 
-_**属性：**_
+_**属性**_：
 
 ```dart
 const TextSpan({
@@ -198,18 +228,18 @@ const TextSpan({
 
 _**例子**_：
 
-> ```dart
-> /// 使用 Text.rich 构造函数，文本小部件可以显示具有不同样式 textspan 的段落。下面的示例为每个单词显示不同样式的“Hello beautiful world”。
-> const Text.rich(
->  TextSpan(
->    text: 'Hello', // default text style
->    children: <TextSpan>[
->      TextSpan(text: ' beautiful ', style: TextStyle(fontStyle: FontStyle.italic)),
->      TextSpan(text: 'world', style: TextStyle(fontWeight: FontWeight.bold)),
->    ],
->  ),
-> )
-> ```
+```dart
+/// 使用 Text.rich 构造函数，文本小部件可以显示具有不同样式 textspan 的段落。下面的示例为每个单词显示不同样式的“Hello beautiful world”。
+const Text.rich(
+ TextSpan(
+   text: 'Hello', // default text style
+   children: <TextSpan>[
+     TextSpan(text: ' beautiful ', style: TextStyle(fontStyle: FontStyle.italic)),
+     TextSpan(text: 'world', style: TextStyle(fontWeight: FontWeight.bold)),
+   ],
+ ),
+)
+```
 
 ## 6. Icon 组件
 
