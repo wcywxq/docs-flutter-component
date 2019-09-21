@@ -6,6 +6,34 @@ description: flutter中最基本的组件
 
 ## **1. Container 组件**
 
+_**说明**_： 由于 _**Container**_ 组合了许多其他小部件，每个小部件都具有自己的布局行为，因此 _**Container**_ 的布局行为有些复杂。
+
+_**介绍**_： _**Container**_ 是一个组合类容器，它是由常见的 _**绘画**_，_**定位**_ 和 _**尺寸调整**_ 等相关组件所组成的一个多功能容器，所以我们只需通过一个 _**Container**_ 组件可以实现同时需要 _**装饰**_、_**变换**_、_**限制**_ 的场景。
+
+_**注意**_:
+
+*  容器的大小可以通过 `width`、`height` 属性来指定，也可以通过`constraints` 来指定；如果它们同时存在时，`width`、`height` 优先。实际上 _**Container**_ 内部会根据 `width`、`height` 来生成一个 `constraints`。
+* `color` 和 `decoration` 是互斥的，如果同时设置它们则会报错！实际上，当指定 `color` 时，_**Container**_ 内会自动创建一个decoration。
+
+_**属性：**_
+
+```dart
+const Container({
+    Key key; // 类似于 react 中的 key
+    AlignmentGeometry alignment;
+    EdgeInsetsGeometry padding;
+    Color color;
+    Decoration decoration;
+    Decoration foregroundDecoration;
+    double width;
+    double height;
+    BoxConstraints constraints;
+    EdgeInsetsGeometry margin;
+    Matrix4 transform;
+    Widget child; // 子组件
+})
+```
+
 ## **2. Row 组件**
 
 _**说明**_： 其设计是基于_**web**_ 开发中的 _**Flexbox**_ 布局模型。
