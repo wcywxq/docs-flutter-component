@@ -167,24 +167,55 @@ Column(
 ```
 
 ## 4. Image 组件
+_**说明**_：创建图片的组件
+
+_**介绍**_：
+
+* 支持以下图像格式：`JPEG`，`PNG`，`GIF`，`GIF`，`WebP`，`BMP` 和 `WBMP`。
+
+* 提供了几种可用于指定图像的方法的构造函数：
+
+  * `new Image`，用于从 `ImageProvider` 获得图像。
+
+  * `new Image.asset`，用于从资源目录显示图片。
+
+  * `new Image.network`，用于从 URL 获取图像（获取网路图片）。
+
+  * `new Image.file`，用于从 File 获取图像。
+
+  * `new Image.memory`，用于从 `Uint8List（内存）` 获取图像。
+
+```dart
+// 资源图片
+new Image.asset('imgs/logo.jpeg'),
+//网络图片
+new Image.network(
+    'https://flutter.io/images/homepage/header-illustration.png'),
+// 本地文件图片
+new Image.file(new File("/Users/gs/Downloads/1.jpeg")),
+// Uint8List 图片
+new Image.memory(bytes),
+//使用 ImageProvider 加载图片
+new Image(image: new NetworkImage("https://flutter.io/images/homepage/screenshot-2.png"))
+```
 
 _**属性**_：
 
 ```dart
 const Image({
-  Key key;
+  Key key; // 类似 react 组件中的 key
   ImageProvider<dynamic> image;
   Widget Function(BuildContext, Widget, int, bool) frameBuilder;
   Widget Function(BuildContext, Widget, ImageChunkEvent) loadingBuilder;
   String semanticLabel;
   bool excludeFromSemantics = false;
-  double width;
-  double height;
-  Color color;
+  double width; // 图片的宽
+  double height; // 图片的高
+  Color color; // 图片的混合色值
   BlendMode colorBlendMode;
-  BoxFit fit;
-  AlignmentGeometry alignment = Alignment.center;
-  ImageRepeat repeat = ImageRepeat.noRepeat;
+  BoxFit fit; // 缩放模式
+  AlignmentGeometry alignment = Alignment.center;// 对其方式，默认为居中
+  ImageRepeat repeat = ImageRepeat.noRepeat; // 重复方式，默认不重复
   Rect centerSlice;
   bool matchTextDirection = false;
   bool gaplessPlayback = false;
