@@ -240,6 +240,18 @@ const Image({
 })
 ```
 
+_**例子**_：
+
+```dart
+/// 默认构造函数可以与任何 ImageProvider 一起使用，例如 NetworkImage，以显示来自互联网的图像。
+const Image(
+  image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+)
+
+/// 在此示例中，使用 Image.network 构造函数显示来自Internet的图像。
+Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg')
+```
+
 ## 5. Text 组件（类似于 &lt;p&gt;）
 
 _**说明**_：该 _**widget**_ 可让创建一个带格式的文本。
