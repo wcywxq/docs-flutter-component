@@ -16,9 +16,26 @@ _**介绍**_：_**Row**_  可以在水平方向排列其子_**widget**_。
 
 _**属性：**_
 
-| 属性名 | 类型 | 含义 |
-| :--- | :--- | :--- |
-|  |  |  |
+```dart
+const Row({
+    // 类似 React 组件中的 key
+    Key key;
+    // 如何将子项放在主轴上，默认为行的左侧或列的顶部
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start;   
+    // 主轴占用的空间，默认为最大
+    MainAxisSize mainAxisSize = MainAxisSize.max;    
+    // 十字轴上的排列方式
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center;
+    // 用作主轴的方向
+    TextDirection textDirection;
+    // 垂直放置的顺序
+    VerticalDirection verticalDirection = VerticalDirection.down;
+    // 对其哪个基线
+    TextBaseline textBaseline;
+    // 子部件
+    List<Widget> children = const <Widget>[];    
+})
+```
 
 _**例子：**_
 
@@ -72,17 +89,18 @@ _**属性**_：
 const Text(
     String data; // 要显示的文本
     {
-        Locale locale; // 设置语言环境，就是国际化，多语言支持
-        int maxLines; // 显示文本的最大行数
-        TextOverflow overflow; // 用来处理文本溢出
-        String semanticsLabel; // 该文本的另一种语义标签
-        bool softWrap; // 文本是否应该在换行符处断行 
-        StrutStyle strutStyle; // 支撑样式
+        Key key; // 类似于 react 组件中的 key 
         TextStyle style； // 文本样式
+        StrutStyle strutStyle; // 支撑样式
+        TextAlign textAlign; // 对齐方式
         TextDirection textDirection; // 文本显示的方向
+        Locale locale; // 设置语言环境，就是国际化，多语言支持
+        bool softWrap; // 文本是否应该在换行符处断行 
+        TextOverflow overflow; // 用来处理文本溢出
         double textScaleFactor; // 每个逻辑像素的字体像素值
+        int maxLines; // 显示文本的最大行数
+        String semanticsLabel; // 该文本的另一种语义标签
         TextWidthBasis textWidthBasis; // 设置空值
-        Key key; // 类似于 react 组件中的 key           
     }
 )
 ```
