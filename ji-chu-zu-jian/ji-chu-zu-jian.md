@@ -177,11 +177,11 @@ _**介绍**_：
 
   * `new Image`，用于从 `ImageProvider` 获得图像。
 
-  * `new Image.asset`，用于从资源目录显示图片。
+  * `new Image.asset`，用于从 `资源目录` 显示图片。
 
-  * `new Image.network`，用于从 URL 获取图像（获取网路图片）。
+  * `new Image.network`，用于从 `URL` 获取图像（获取网路图片）。
 
-  * `new Image.file`，用于从 File 获取图像。
+  * `new Image.file`，用于从 `File` 获取图像。
 
   * `new Image.memory`，用于从 `Uint8List（内存）` 获取图像。
 
