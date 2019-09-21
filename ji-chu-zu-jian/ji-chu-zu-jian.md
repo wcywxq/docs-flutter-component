@@ -203,22 +203,39 @@ _**属性**_：
 
 ```dart
 const Image({
-  Key key; // 类似 react 组件中的 key
+  // 类似 react 组件中的 key
+  Key key; 
+  // 要显示的图像。
   ImageProvider<dynamic> image;
+  // 负责创建代表该图像的窗口小部件
   Widget Function(BuildContext, Widget, int, bool) frameBuilder;
+  // 用于指定图像仍在加载时向用户显示的小部件
   Widget Function(BuildContext, Widget, ImageChunkEvent) loadingBuilder;
-  String semanticLabel;
-  bool excludeFromSemantics = false;
-  double width; // 图片的宽
-  double height; // 图片的高
-  Color color; // 图片的混合色值
+  // 图像的语义描述，用于向Andoid上的TalkBack和iOS上的VoiceOver提供图像描述。(talkback是一款由谷歌官方开发的系统软件,它的定位是帮助盲人或者视力有障碍的用户提供语言辅助；Voiceover功能是APPLE公司在2009年4月新推出的一种语音辅助程序。)
+  String semanticLabel; 
+  // 是否启用图像的语义描述
+  bool excludeFromSemantics = false; 
+  // 图片的宽
+  double width; 
+  // 图片的宽
+  double height; 
+  // 图片的混合色值
+  Color color; 
+  // 如果为非 null，则使用 colorBlendMode 将此颜色与每个图像像素混合
   BlendMode colorBlendMode;
-  BoxFit fit; // 缩放模式
-  AlignmentGeometry alignment = Alignment.center;// 对其方式，默认为居中
-  ImageRepeat repeat = ImageRepeat.noRepeat; // 重复方式，默认不重复
+  // 图片的混合色值
+  BoxFit fit; 
+  // 对其方式，默认为居中
+  AlignmentGeometry alignment = Alignment.center;
+  // 重复方式，默认不重复
+  ImageRepeat repeat = ImageRepeat.noRepeat; 
+  // 九片图像的中心切片
   Rect centerSlice;
+  // 是否在 TextDirection 的方向上绘制图像，默认为 false。if true，那么在TextDirection.ltr 上下文中，将在左上角绘制图像（图像的“正常”绘制方向）; 在 TextDirection.rtl 上下文中，图像将在水平方向上以缩放因子 -1 绘制，以便原点位于右上角
   bool matchTextDirection = false;
-  bool gaplessPlayback = false;
+  // 当图像提供者发生变化时，是继续显示旧图像，默认不显示
+  bool gaplessPlayback = false;  
+  // 图像过滤器的质量级别。(渲染模式的质量)
   FilterQuality filterQuality = FilterQuality.low;
 })
 ```
