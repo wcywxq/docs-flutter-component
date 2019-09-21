@@ -168,6 +168,30 @@ Column(
 
 ## 4. Image 组件
 
+_**属性**_：
+
+```dart
+const Image({
+  Key key;
+  ImageProvider<dynamic> image;
+  Widget Function(BuildContext, Widget, int, bool) frameBuilder;
+  Widget Function(BuildContext, Widget, ImageChunkEvent) loadingBuilder;
+  String semanticLabel;
+  bool excludeFromSemantics = false;
+  double width;
+  double height;
+  Color color;
+  BlendMode colorBlendMode;
+  BoxFit fit;
+  AlignmentGeometry alignment = Alignment.center;
+  ImageRepeat repeat = ImageRepeat.noRepeat;
+  Rect centerSlice;
+  bool matchTextDirection = false;
+  bool gaplessPlayback = false;
+  FilterQuality filterQuality = FilterQuality.low;
+})
+```
+
 ## 5. Text 组件（类似于 &lt;p&gt;）
 
 _**说明**_：该 _**widget**_ 可让创建一个带格式的文本。
