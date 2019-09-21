@@ -13,23 +13,23 @@ _**介绍**_： _**Container**_ 是一个组合类容器，它是由常见的 _*
 _**注意**_：
 
 *  容器的大小可以通过 `width`、`height` 属性来指定，也可以通过`constraints` 来指定；如果它们同时存在时，`width`、`height` 优先。实际上 _**Container**_ 内部会根据 `width`、`height` 来生成一个 `constraints`。
-* `color` 和 `decoration` 是互斥的，如果同时设置它们则会报错！实际上，当指定 `color` 时，_**Container**_ 内会自动创建一个decoration。
+* `color` 和 `decoration` 是互斥的，如果同时设置它们则会报错！实际上，当指定 `color` 时，_**Container**_ 内会自动创建一个 _**decoration**_。
 
 _**属性**_：
 
 ```dart
 const Container({
     Key key; // 类似于 react 中的 key
-    AlignmentGeometry alignment;
-    EdgeInsetsGeometry padding;
-    Color color;
-    Decoration decoration;
-    Decoration foregroundDecoration;
-    double width;
-    double height;
-    BoxConstraints constraints;
-    EdgeInsetsGeometry margin;
-    Matrix4 transform;
+    AlignmentGeometry alignment; // 对齐方式
+    EdgeInsetsGeometry padding; // 容器内补白，属于decoration的装饰范围
+    Color color; // 背景色
+    Decoration decoration; // 背景装饰
+    Decoration foregroundDecoration; // 前景装饰
+    double width; // 容器的宽度
+    double height; // 容器的高度
+    BoxConstraints constraints; // 容器大小的限制条件
+    EdgeInsetsGeometry margin; // 容器外补白，不属于decoration 的装饰范围
+    Matrix4 transform; // 变换
     Widget child; // 子组件
 })
 ```
