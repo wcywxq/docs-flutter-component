@@ -620,7 +620,7 @@ _**说明**_：`AppBar`通常用在 `Scaffold.appBar` 属性中，该属性将�
 
 * **图片展示及布局**
 
-![](../.gitbook/assets/app_bar%20%281%29.png)
+![](../.gitbook/assets/app_bar.png)
 
 _**介绍**_：`AppBar` 是一个 `Material` 风格的导航栏，通过它可以设置 `导航栏标题`、`导航栏菜单`、`导航栏底部的Tab标题` 等。
 
