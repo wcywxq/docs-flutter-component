@@ -553,6 +553,73 @@ const Scaffold({
 
 _**例子**_：
 
+```dart
+/// 此示例显示了具有 body 和 FloatingActionButton 的 Scaffold。
+int _count = 0;
+
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Sample Code'),
+    ),
+    body: Center(
+      child: Text('You have pressed the button $_count times.')
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () => setState(() => _count++),
+      tooltip: 'Increment Counter',
+      child: const Icon(Icons.add),
+    ),
+  );
+}
+
+/// 此示例显示了一个具有 backgroundColor，body 和 FloatingActionButton 的 Scaffold。
+int _count = 0;
+
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Sample Code'),
+    ),
+    body: Center(
+      child: Text('You have pressed the button $_count times.')
+    ),
+    backgroundColor: Colors.blueGrey.shade200,
+    floatingActionButton: FloatingActionButton(
+      onPressed: () => setState(() => _count++),
+      tooltip: 'Increment Counter',
+      child: const Icon(Icons.add),
+    ),
+  );
+}
+
+/// 此示例显示了一个具有 AppBar，BottomAppBar 和 FloatingActionButton 的 Scaffold。
+int _count = 0;
+
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Sample Code'),
+    ),
+    body: Center(
+      child: Text('You have pressed the button $_count times.'),
+    ),
+    bottomNavigationBar: BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      child: Container(height: 50.0,),
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () => setState(() {
+        _count++;
+      }),
+      tooltip: 'Increment Counter',
+      child: Icon(Icons.add),
+    ),
+    floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+  );
+}
+```
+
 ## 9. Appbar 组件
 
 ## 10. FlutterLogo 组件
