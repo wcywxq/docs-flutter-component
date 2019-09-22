@@ -387,6 +387,91 @@ Row(
 
 ## 7. RaisedButton 组件
 
+_**说明**_：`Material Design` 中的 `button`， 一个凸起的材质矩形按钮。
+
+_**介绍**_：`RaisedButton` 基于 `Material Design`， 当按下该按钮时，其 `Material.elevation（相对于其父项放置此按钮的z坐标。）` 会增加。
+
+—**属性**—：
+```dart
+const RaisedButton({
+  Key key; // 类似于 react 组件中的 key
+  void Function() onPressed; // 轻击或激活按钮时调用的回调。如果将其设置为 null，则该按钮将被禁用。
+  void Function(bool) onHighlightChanged; ButtonTextTheme textTheme; 
+  Color textColor; 
+  Color disabledTextColor; 
+  Color color; 
+  Color disabledColor; 
+  Color focusColor; 
+  Color hoverColor; 
+  Color highlightColor; 
+  Color splashColor; 
+  Brightness colorBrightness; 
+  double elevation; 
+  double focusElevation; 
+  double hoverElevation; 
+  double highlightElevation; 
+  double disabledElevation; 
+  EdgeInsetsGeometry padding; 
+  ShapeBorder shape; 
+  Clip clipBehavior; 
+  FocusNode focusNode; 
+  bool autofocus = false; 
+  MaterialTapTargetSize materialTapTargetSize; Duration animationDuration; 
+  Widget child;
+})
+```
+
+_**例子**_：
+```dart
+/// 此示例演示如何渲染具有禁用背景的 RaisedButton，已启用的RaisedButton 和 最后一个带有渐变背景的 RaisedButton。
+Widget build(BuildContext context) {
+  return Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const RaisedButton(
+          onPressed: null,
+          child: Text(
+            'Disabled Button',
+            style: TextStyle(fontSize: 20)
+          ),
+        ),
+        const SizedBox(height: 30),
+        RaisedButton(
+          onPressed: () {},
+          child: const Text(
+            'Enabled Button',
+            style: TextStyle(fontSize: 20)
+          ),
+        ),
+        const SizedBox(height: 30),
+        RaisedButton(
+          onPressed: () {},
+          textColor: Colors.white,
+          padding: const EdgeInsets.all(0.0),
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: <Color>[
+                  Color(0xFF0D47A1),
+                  Color(0xFF1976D2),
+                  Color(0xFF42A5F5),
+                ],
+              ),
+            ),
+            padding: const EdgeInsets.all(10.0),
+            child: const Text(
+              'Gradient Button',
+              style: TextStyle(fontSize: 20)
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+```
+
 ## 8. Scaffold 组件
 
 ## 9. Appbar 组件
