@@ -502,6 +502,57 @@ Widget build(BuildContext context) {
 
 ## 8. Scaffold 组件
 
+_**说明**_：`Scaffold` 是一个路由页的骨架，我们使用它可以很容易地拼装出一个完整的页面。
+
+_**介绍**_：一个完整的路由页可能会包含 `导航栏`、`抽屉菜单(Drawer)` 以及底部 `Tab导航菜单` 等。`Scaffold` 实现了基本的 `Material Design` 布局结构。在 `Material` 设计中定义的单个界面上的各种布局元素，在 `Scaffold` 中都支持。
+
+_**属性**_：
+
+```dart
+const Scaffold({
+  // 类似于 react 组件中的 key
+  Key key; 
+  // AppBar 是一个 Material 风格的导航栏，通过它可以设置导航栏标题、导航栏菜单、导航栏底部的 Tab标题等。
+  PreferredSizeWidget appBar; 
+  // 主体内容区域，显示在 appBar 的下方
+  Widget body; 
+  // 悬浮按钮
+  Widget floatingActionButton; 
+  // 悬浮按钮位置，默认在右下方
+  FloatingActionButtonLocation floatingActionButtonLocation; 
+  // 悬浮按钮动画
+  FloatingActionButtonAnimator floatingActionButtonAnimator;
+  // 固定在下方显示的按钮，比如对话框下方的确定、取消按钮
+  List<Widget> persistentFooterButtons; 
+  // 侧滑菜单左
+  Widget drawer; 
+  // 侧滑菜单右
+  Widget endDrawer; 
+  // 底部导航
+  Widget bottomNavigationBar; 
+  // 底部持久化提示框
+  Widget bottomSheet; 
+  // 内容的背景颜色，默认使用的是 ThemeData.scaffoldBackgroundColor 的值
+  Color backgroundColor; 
+  // 控制界面内容 body 是否重新布局来避免底部被覆盖了，比如当键盘显示的时候，重新布局避免被键盘盖住内容。默认值为 true。
+  bool resizeToAvoidBottomPadding; 
+  // 重新计算布局空间大小
+  bool resizeToAvoidBottomInset; 
+  // 是否显示到底部，默认为 true，将显示到顶部状态栏
+  bool primary = true; 
+  // 处理拖动行为的方式，如果设置为 DragStartBehavior.start，则将在检测到拖动手势时开始。如果设置为 DragStartBehavior.down，将在首次检测到 down事件时开始。
+  DragStartBehavior drawerDragStartBehavior = DragStartBehavior.start;
+  // 如果为 true，并且指定了 bottomNavigationBar 或 persistentFooterButtons，则body 将延伸到 Scaffold 的底部，而不是仅延伸到 bottomNavigationBar 或   persistentFooterButtons 的顶部 
+  bool extendBody = false; 
+  // 打开侧边栏时，遮罩层的颜色
+  Color drawerScrimColor; 
+  // 打开侧边栏的区域的宽度
+  double drawerEdgeDragWidth;
+})
+```
+
+_**例子**_：
+
 ## 9. Appbar 组件
 
 ## 10. FlutterLogo 组件
