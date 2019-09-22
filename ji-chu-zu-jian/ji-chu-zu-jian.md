@@ -327,6 +327,64 @@ const Text.rich(
 
 ## 6. Icon 组件
 
+_**说明**_：`Icon` 通常是由 `WidgetsApp` 或 `MaterialApp` 自动引入的。
+
+_**介绍**_：_**Flutter**_ 中，可以像 _**Web**_ 开发一样使用 `iconfont`，`iconfont` 即“字体图标”，它是将图标做成字体文件，然后通过指定不同的字符而显示不同的图片。
+
+_**优点**_：
+
+> 在 _**Flutter**_ 开发中，`iconfont` 和 `图片` 相比有如下优势：
+
+* _**体积小**_：可以减小安装包大小。
+
+* _**矢量的**_：`iconfont` 都是矢量图标，放大不会影响其清晰度。
+
+* _**可以应用文本样式**_：可以像文本一样改变字体图标的颜色、大小对齐等。
+
+* _**可以通过 `TextSpan` 和 `文本` 混用**_。
+
+_**属性**_：
+
+```dart
+const Icon(
+  IconData icon; // 显示的图标。图标可以为 null，在这种情况下，组件将呈现为指定大小的空白区域。
+  {
+    Key key; // 类似 react 组件中的 key 
+    double size; // 图标的大小，以逻辑像素为单位。
+    Color color; // 绘制图标时使用的颜色。
+    String semanticLabel; // 图标的语义标签。
+    TextDirection textDirection; // 用于呈现图标的文本方向。
+  }
+)
+```
+
+_**例子**_：
+
+```dart
+/// 本示例说明如何创建不同颜色和大小的 Icon。
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  children: const <Widget>[
+    Icon(
+      Icons.favorite,
+      color: Colors.pink,
+      size: 24.0,
+      semanticLabel: 'Text to announce in accessibility modes',
+    ),
+    Icon(
+      Icons.audiotrack,
+      color: Colors.green,
+      size: 30.0,
+    ),
+    Icon(
+      Icons.beach_access,
+      color: Colors.blue,
+      size: 36.0,
+    ),
+  ],
+)
+```
+
 ## 7. RaisedButton 组件
 
 ## 8. Scaffold 组件
