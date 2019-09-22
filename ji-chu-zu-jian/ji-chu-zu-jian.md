@@ -391,32 +391,60 @@ _**说明**_：`Material Design` 中的 `button`， 一个凸起的材质矩形�
 
 _**介绍**_：`RaisedButton` 基于 `Material Design`， 当按下该按钮时，其 `Material.elevation（相对于其父项放置此按钮的z坐标。）` 会增加。
 
-—**属性**—：
+_**属性**_：
 ```dart
 const RaisedButton({
-  Key key; // 类似于 react 组件中的 key
-  void Function() onPressed; // 轻击或激活按钮时调用的回调。如果将其设置为 null，则该按钮将被禁用。
-  void Function(bool) onHighlightChanged; ButtonTextTheme textTheme; 
+  // 类似于 react 组件中的 key
+  Key key; 
+  // 轻击或激活按钮时调用的回调。如果将其设置为 null，则该按钮将被禁用。
+  void Function() onPressed; 
+  // 水波纹高亮变化回调
+  void Function(bool) onHighlightChanged; 
+  // 定义按钮的基本颜色，以及按钮的最小尺寸，内部填充和形状的默认值。默认为 ButtonTheme.of(context).textTheme。
+  ButtonTextTheme textTheme; 
+  // 用于此按钮的文字颜色。
   Color textColor; 
+  // 按钮被禁用时的文字颜色。
   Color disabledTextColor; 
+  // 按钮的颜色。
   Color color; 
+  // 按钮被禁用时的颜色  
   Color disabledColor; 
+  // 当按钮具有输入焦点时的颜色。
   Color focusColor; 
+  // 当指针悬停在按钮上时的颜色。
   Color hoverColor; 
+  // 按钮的水波纹亮起的颜色
   Color highlightColor; 
+  // 水波纹的颜色
   Color splashColor; 
+  // 按钮主题高亮
   Brightness colorBrightness; 
+  // 按钮下面的阴影长度
   double elevation; 
+  // 启用按钮并具有输入焦点时，按钮下面的阴影长度。
   double focusElevation; 
+  // 启用按钮且指针悬停在其上方时，按钮下面的阴影长度。
   double hoverElevation; 
+  // 按钮高亮时的下面的阴影长度
   double highlightElevation; 
+  // 未启用按钮时，按钮下面的阴影长度。
   double disabledElevation; 
+  // 按钮内部的 padding
   EdgeInsetsGeometry padding; 
+  // 按钮的形状
   ShapeBorder shape; 
+  // 根据此选项，内容将被裁剪（或不裁剪）。
   Clip clipBehavior; 
+  // 一个可选的焦点节点，用作此组件的焦点节点。
   FocusNode focusNode; 
+  // 如果当前未将其范围内的其他节点作为焦点，则将此组件选择为初始焦点时为True。
   bool autofocus = false; 
-  MaterialTapTargetSize materialTapTargetSize; Duration animationDuration; 
+  // 配置点击目标的最小大小。
+  MaterialTapTargetSize materialTapTargetSize; 
+  // 定义动画的持续时间。
+  Duration animationDuration; 
+  // 子组件
   Widget child;
 })
 ```
