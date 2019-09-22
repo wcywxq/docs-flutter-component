@@ -8,11 +8,15 @@ description: flutter中最基本的组件
 
 _**说明**_： 由于 _**Container**_ 组合了许多其他小部件，每个小部件都具有自己的布局行为，因此 _**Container**_ 的布局行为有些复杂。
 
+* **图片展示其布局**
+
+![](../.gitbook/assets/app_bar.png)
+
 _**介绍**_： _**Container**_ 是一个组合类容器，它是由常见的 _**绘画**_，_**定位**_ 和 _**尺寸调整**_ 等相关组件所组成的一个多功能容器，所以我们只需通过一个 _**Container**_ 组件可以实现同时需要 _**装饰**_、_**变换**_、_**限制**_ 的场景。
 
 _**注意**_：
 
-*  容器的大小可以通过 `width`、`height` 属性来指定，也可以通过`constraints` 来指定；如果它们同时存在时，`width`、`height` 优先。实际上 _**Container**_ 内部会根据 `width`、`height` 来生成一个 `constraints`。
+* 容器的大小可以通过 `width`、`height` 属性来指定，也可以通过`constraints` 来指定；如果它们同时存在时，`width`、`height` 优先。实际上 _**Container**_ 内部会根据 `width`、`height` 来生成一个 `constraints`。
 * `color` 和 `decoration` 是互斥的，如果同时设置它们则会报错！实际上，当指定 `color` 时，_**Container**_ 内会自动创建一个 _**decoration**_。
 
 _**属性**_：
@@ -68,7 +72,7 @@ Container(
 
 _**说明**_： 其设计是基于_**web**_ 开发中的 _**Flexbox**_ 布局模型。
 
-_**介绍**_：_**Row**_  可以在水平方向排列其子_**widget**_。
+_**介绍**_：_**Row**_ 可以在水平方向排列其子_**widget**_。
 
 * 如果想要将子项自适应所剩余的空间，则需要包装在 _**Expanded  组件**_ 中（类似于 _**css 弹性盒模型**_）。_**Row**_ 组件不会滚动，如果想要滚动，请使用 _**ListView 组件**_。
 
@@ -117,11 +121,11 @@ Row(
 )
 ```
 
-## 3. Column 组件 
+## 3. Column 组件
 
 _**说明**_： 其设计是基于_**web**_ 开发中的 _**Flexbox**_ 布局模型。
 
-_**介绍**_：_**Column**_  可以在垂直方向排列其子_**widget**_。
+_**介绍**_：_**Column**_ 可以在垂直方向排列其子_**widget**_。
 
 * 如果想要将子项自适应所剩余的空间，则需要包装在 _**Expanded  组件**_ 中（类似于 _**css 弹性盒模型**_）。_**Column**_ 组件不会滚动，如果想要滚动，请使用 _**ListView 组件**_。
 
@@ -167,22 +171,17 @@ Column(
 ```
 
 ## 4. Image 组件
+
 _**说明**_：创建图片的组件
 
 _**介绍**_：
 
 * 支持以下图像格式：`JPEG`，`PNG`，`GIF`，`GIF`，`WebP`，`BMP` 和 `WBMP`。
-
 * 提供了几种可用于指定图像的方法的构造函数：
-
   * `new Image`，用于从 `ImageProvider` 获得图像。
-
   * `new Image.asset`，用于从 `资源目录` 显示图片。
-
   * `new Image.network`，用于从 `URL` 获取图像（获取网路图片）。
-
   * `new Image.file`，用于从 `File` 获取图像。
-
   * `new Image.memory`，用于从 `Uint8List（内存）` 获取图像。
 
 ```dart
@@ -336,11 +335,8 @@ _**优点**_：
 > 在 _**Flutter**_ 开发中，`iconfont` 和 `图片` 相比有如下优势：
 
 * _**体积小**_：可以减小安装包大小。
-
 * _**矢量的**_：`iconfont` 都是矢量图标，放大不会影响其清晰度。
-
 * _**可以应用文本样式**_：可以像文本一样改变字体图标的颜色、大小对齐等。
-
 * _**可以通过 `TextSpan` 和 `文本` 混用**_。
 
 _**属性**_：
@@ -392,6 +388,7 @@ _**说明**_：`Material Design` 中的 `button`， 一个凸起的材质矩形�
 _**介绍**_：`RaisedButton` 基于 `Material Design`， 当按下该按钮时，其 `Material.elevation（相对于其父项放置此按钮的z坐标。）` 会增加。
 
 _**属性**_：
+
 ```dart
 const RaisedButton({
   // 类似于 react 组件中的 key
@@ -450,6 +447,7 @@ const RaisedButton({
 ```
 
 _**例子**_：
+
 ```dart
 /// 此示例演示如何渲染具有禁用背景的 RaisedButton，已启用的RaisedButton 和 最后一个带有渐变背景的 RaisedButton。
 Widget build(BuildContext context) {
