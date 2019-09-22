@@ -622,6 +622,114 @@ Widget build(BuildContext context) {
 
 ## 9. Appbar 组件
 
+_**说明**_：`AppBar`通常用在 `Scaffold.appBar` 属性中，该属性将导航栏作为固定高度的组件放置在屏幕顶部。
+
+_**介绍**_：`AppBar` 是一个 `Material` 风格的导航栏，通过它可以设置 `导航栏标题`、`导航栏菜单`、`导航栏底部的Tab标题` 等。
+
+_**属性**_：
+
+```dart
+const AppBar({
+  // 类似于 react 组件中的 key
+  Key key;
+  // 导航栏最左侧 Widget，常见为抽屉菜单按钮或返回按钮。
+  Widget leading;
+  // 如果 leading 为 null，是否自动实现默认的 leading 按钮
+  bool automaticallyImplyLeading = true;
+  // 页面标题
+  Widget title;
+  // 导航栏右侧菜单
+  List<Widget> actions;
+  // 一个显示在 AppBar 下方的控件，高度和 AppBar 高度一样，可以实现一些特殊的效果，该属性通常在 SliverAppBar 中使用。
+  Widget flexibleSpace;
+  // 导航栏底部菜单，通常为Tab按钮组
+  PreferredSizeWidget bottom;
+  // 导航栏阴影
+  double elevation;
+  // Material 的形状和阴影
+  ShapeBorder shape;
+  // 背景颜色
+  Color backgroundColor;
+  // 状态栏的深度 有白色和黑色两种主题，用来改变时间，wi-fi，电量显示的颜色
+  Brightness brightness;
+  // 导航栏图标的颜色，不透明度和大小。
+  IconThemeData iconTheme;
+  // 导航栏操作中显示的图标的颜色，不透明度和大小。
+  IconThemeData actionsIconTheme;
+  // 导航中文本的样式。通常与亮度 backgroundColor，iconTheme 一起设置。
+  TextTheme textTheme;
+  // 此导航栏是否显示在屏幕顶部。默认为 true。
+  bool primary = true;
+  // 标题是否应该居中。
+  bool centerTitle;
+  // flexibleSpace 和 title 的距离 默认是重合的
+  double titleSpacing = NavigationToolbar.kMiddleSpacing;
+  // 导航栏的透明度
+  double toolbarOpacity = 1.0;
+  // 底部导航栏的透明度
+  double bottomOpacity = 1.0;
+})
+```
+
+_**例子**_：
+
+```dart
+/// 此示例显示一个带有两个简单操作的 AppBar。第一个动作打开 SnackBar，第二个动作导航到新页面。
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+final SnackBar snackBar = const SnackBar(content: Text('Showing Snackbar'));
+
+void openPage(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(
+    builder: (BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Next page'),
+        ),
+        body: const Center(
+          child: Text(
+            'This is the next page',
+            style: TextStyle(fontSize: 24),
+          ),
+        ),
+      );
+    },
+  ));
+}
+
+// ...
+
+Widget build(BuildContext context) {
+  return Scaffold(
+    key: scaffoldKey,
+    appBar: AppBar(
+      title: const Text('AppBar Demo'),
+      actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.add_alert),
+          tooltip: 'Show Snackbar',
+          onPressed: () {
+            scaffoldKey.currentState.showSnackBar(snackBar);
+          },
+        ),
+        IconButton(
+          icon: const Icon(Icons.navigate_next),
+          tooltip: 'Next page',
+          onPressed: () {
+            openPage(context);
+          },
+        ),
+      ],
+    ),
+    body: const Center(
+      child: Text(
+        'This is the home page',
+        style: TextStyle(fontSize: 24),
+      ),
+    ),
+  );
+}
+```
+
 ## 10. FlutterLogo 组件
 
 ## 11. Placeholder 组件
