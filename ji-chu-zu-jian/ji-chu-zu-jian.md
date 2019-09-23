@@ -765,3 +765,31 @@ FlutterLogo(
 
 ## 11. Placeholder 组件
 
+_**说明**_：一个绘制了一个盒子的的 `widget`，代表日后有 `widget` 将会被添加到该盒子中
+
+_**介绍**_：占位控件，该控件绘制一个框，表示将来会在该位置添加其他控件。这个控件在开发过程中很有用，可提示该处接口还没完成。默认情况下，控件的大小自适应其容器。如果该控件处于无界空间，它将根据给定的 `fallbackWidth` 和 `fallbackHeight` 自行调整大小。
+
+_**属性**_：
+
+```dart
+const Placeholder({
+  Key key; // 类似与 react 组件中的 key
+  Color color = const Color(0xFF455A64); // 绘制占位符框的颜色。
+  double strokeWidth = 2.0; // 占位符框中的行宽度。
+  double fallbackWidth = 400.0; // 当占位符处于宽度无界的情况时使用的宽度。
+  double fallbackHeight = 400.0; // 当占位符处于宽度无界的情况时使用的高度。
+})
+```
+
+_**例子**_：
+
+```dart
+/// 该例子展示了 Placeholder 组件的属性
+Placeholder(
+  color: Colors.blue,
+  strokeWidth: 5,
+  fallbackHeight: 200,
+  fallbackWidth: 200,
+),
+```
+
