@@ -730,5 +730,38 @@ Widget build(BuildContext context) {
 
 ## 10. FlutterLogo 组件
 
+_**说明**_：用来展示 `Flutter` 的 `logo`
+
+_**介绍**_：一个用来展示 `Flutter logo` 的 `Widget`
+
+_**属性**_：
+
+```dart
+const FlutterLogo({
+  Key key; // 类似于 react 中的 key
+  double size; // 尺寸大小
+  MaterialColor colors; // 设置颜色
+  Color textColor = const Color(0xFF616161); // 用于在徽标上绘制 “Flutter” 文本的颜色
+  FlutterLogoStyle style = FlutterLogoStyle.markOnly; // 是否显示文本，以及文本与图标之间的排列方式，默认不显示文本
+  Duration duration = const Duration(milliseconds: 750); // 样式、颜色 或 文本颜色 发生改变时的动画的持续时间。
+  Curve curve = Curves.fastOutSlowIn; // 样式、颜色 或 文本颜色 发生变化时的动画曲线
+})
+```
+
+_**例子**_：
+
+```dart
+/// 下例展示了 FlutterLogo 组件的一些属性的应用
+FlutterLogo(
+  colors: Colors.yellow,
+  size: 200,
+  textColor: Colors.blue,
+  duration: Duration(microseconds: 1),
+  style: FlutterLogoStyle.horizontal, 
+  curve: Curves.bounceIn,
+)
+
+```
+
 ## 11. Placeholder 组件
 

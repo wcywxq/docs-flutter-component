@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>基础组件</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body>
+        <hr>
+<h2 id="description-flutter%E4%B8%AD%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%BB%84%E4%BB%B6">description: flutter中最基本的组件</h2>
+<h1 id="%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6">基础组件</h1>
+<h2 id="1-Container-%E7%BB%84%E4%BB%B6"><strong>1. Container 组件</strong></h2>
+<p><em><strong>说明</strong></em>： 由于 <code>Container</code> 组合了许多其他小部件，每个小部件都具有自己的布局行为，因此 <code>Container</code> 的布局行为有些复杂。</p>
+<p><em><strong>介绍</strong></em>： <code>Container</code> 是一个组合类容器，它是由常见的 <code>绘画</code>，<code>定位</code> 和 <code>尺寸调整</code> 等相关组件所组成的一个多功能容器，所以我们只需通过一个 <code>Container</code> 组件可以实现同时需要 <code>装饰</code>、<code>变换</code>、<code>限制</code> 的场景。</p>
+<p><em><strong>注意</strong></em>：</p>
+<ul>
+<li>容器的大小可以通过 <code>width</code>、<code>height</code> 属性来指定，也可以通过<code>constraints</code> 来指定；如果它们同时存在时，<code>width</code>、<code>height</code> 优先。实际上 <code>Container</code> 内部会根据 <code>width</code>、<code>height</code> 来生成一个 <code>constraints</code>。</li>
+<li><code>color</code> 和 <code>decoration</code> 是互斥的，如果同时设置它们则会报错！实际上，当指定 <code>color</code> 时，<code>Container</code> 内会自动创建一个 <code>decoration</code>。</li>
+</ul>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> Container({
+    Key key; <span class="hljs-comment">// 类似于 react 中的 key</span>
+    AlignmentGeometry alignment; <span class="hljs-comment">// 对齐方式</span>
+    EdgeInsetsGeometry padding; <span class="hljs-comment">// 容器内补白，属于decoration的装饰范围</span>
+    Color color; <span class="hljs-comment">// 背景色</span>
+    Decoration decoration; <span class="hljs-comment">// 背景装饰</span>
+    Decoration foregroundDecoration; <span class="hljs-comment">// 前景装饰</span>
+    <span class="hljs-built_in">double</span> width; <span class="hljs-comment">// 容器的宽度</span>
+    <span class="hljs-built_in">double</span> height; <span class="hljs-comment">// 容器的高度</span>
+    BoxConstraints constraints; <span class="hljs-comment">// 容器大小的限制条件</span>
+    EdgeInsetsGeometry margin; <span class="hljs-comment">// 容器外补白，不属于decoration 的装饰范围</span>
+    Matrix4 transform; <span class="hljs-comment">// 变换</span>
+    Widget child; <span class="hljs-comment">// 子组件</span>
+})
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 此示例显示了一个 48x48 的琥珀色正方形，放置在 Center 组件内，以免造成其它影响</span></span>
+Center(
+  child: Container(
+    margin: <span class="hljs-keyword">const</span> EdgeInsets.all(<span class="hljs-number">10.0</span>),
+    color: Colors.amber[<span class="hljs-number">600</span>],
+    width: <span class="hljs-number">48.0</span>,
+    height: <span class="hljs-number">48.0</span>,
+  ),
+)
+
+<span class="hljs-comment"><span class="markdown">/// 展示了 Container 的一些功能，显示的是一个旋转的矩形，矩形的中心是一个 Hello World</span></span>
+Container(
+  constraints: BoxConstraints.expand(
+    height: Theme.of(context).textTheme.display1.fontSize * <span class="hljs-number">1.1</span> + <span class="hljs-number">200.0</span>,
+  ),
+  padding: <span class="hljs-keyword">const</span> EdgeInsets.all(<span class="hljs-number">8.0</span>),
+  color: Colors.blue[<span class="hljs-number">600</span>],
+  alignment: Alignment.center,
+  child: Text(<span class="hljs-string">'Hello World'</span>,
+    style: Theme.of(context)
+        .textTheme
+        .display1
+        .copyWith(color: Colors.white)),
+  transform: Matrix4.rotationZ(<span class="hljs-number">0.1</span>),
+)
+</div></code></pre>
+<h2 id="2-Row-%E7%BB%84%E4%BB%B6"><strong>2. Row 组件</strong></h2>
+<p><em><strong>说明</strong></em>： 其设计是基于 <code>web</code> 开发中的 <code>Flexbox</code> 布局模型。</p>
+<p><em><strong>介绍</strong></em>：<code>Row</code> 可以在水平方向排列其子 <code>widget</code>。</p>
+<ul>
+<li>如果想要将子项自适应所剩余的空间，则需要包装在 <code>Expanded 组件</code> 中（类似于 <code>css 弹性盒模型</code>）。<code>Row</code> 组件不会滚动，如果想要滚动，请使用 <code>ListView 组件</code>。</li>
+</ul>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> Row({
+    <span class="hljs-comment">// 类似 React 组件中的 key</span>
+    Key key;
+    <span class="hljs-comment">// 如何将子项放在主轴上，默认为行的左侧或列的顶部</span>
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start;   
+    <span class="hljs-comment">// 主轴占用的空间，默认为最大</span>
+    MainAxisSize mainAxisSize = MainAxisSize.max;    
+    <span class="hljs-comment">// 十字轴上的排列方式</span>
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center;
+    <span class="hljs-comment">// 用作主轴的方向</span>
+    TextDirection textDirection;
+    <span class="hljs-comment">// 垂直放置的顺序</span>
+    VerticalDirection verticalDirection = VerticalDirection.down;
+    <span class="hljs-comment">// 对其哪个基线</span>
+    TextBaseline textBaseline;
+    <span class="hljs-comment">// 子部件</span>
+    <span class="hljs-built_in">List</span>&lt;Widget&gt; children = <span class="hljs-keyword">const</span> &lt;Widget&gt;[];    
+})
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 此示例将可用空间划分为三个（水平），并将文本放在前两个单元格中心，将Flutter徽标放在第三个中心：</span></span>
+Row(
+  children: &lt;Widget&gt;[
+    Expanded(
+      child: Text(<span class="hljs-string">'Deliver features faster'</span>, textAlign: TextAlign.center),
+    ),
+    Expanded(
+      child: Text(<span class="hljs-string">'Craft beautiful UIs'</span>, textAlign: TextAlign.center),
+    ),
+    Expanded(
+      child: FittedBox(
+        fit: BoxFit.contain, <span class="hljs-comment">// otherwise the logo will be tiny</span>
+        child: <span class="hljs-keyword">const</span> FlutterLogo(),
+      ),
+    ),
+  ],
+)
+</div></code></pre>
+<h2 id="3-Column-%E7%BB%84%E4%BB%B6">3. Column 组件</h2>
+<p><em><strong>说明</strong></em>： 其设计是基于 <code>web</code> 开发中的 <code>Flexbox</code> 布局模型。</p>
+<p><em><strong>介绍</strong></em>：<code>Column</code> 可以在垂直方向排列其子 <code>widget</code>。</p>
+<ul>
+<li>如果想要将子项自适应所剩余的空间，则需要包装在 <code>Expanded 组件</code> 中（类似于 <code>css 弹性盒模型</code>）。<code>Column</code> 组件不会滚动，如果想要滚动，请使用 <code>ListView 组件</code>。</li>
+</ul>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> Column({
+    <span class="hljs-comment">// 类似 React 组件中的 key</span>
+    Key key;
+    <span class="hljs-comment">// 如何将子项放在主轴上，默认为行的左侧或列的顶部</span>
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start;   
+    <span class="hljs-comment">// 主轴占用的空间，默认为最大</span>
+    MainAxisSize mainAxisSize = MainAxisSize.max;    
+    <span class="hljs-comment">// 十字轴上的排列方式</span>
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center;
+    <span class="hljs-comment">// 用作主轴的方向</span>
+    TextDirection textDirection;
+    <span class="hljs-comment">// 垂直放置的顺序</span>
+    VerticalDirection verticalDirection = VerticalDirection.down;
+    <span class="hljs-comment">// 对其哪个基线</span>
+    TextBaseline textBaseline;
+    <span class="hljs-comment">// 子部件</span>
+    <span class="hljs-built_in">List</span>&lt;Widget&gt; children = <span class="hljs-keyword">const</span> &lt;Widget&gt;[];    
+})
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 此示例使用Column垂直排列三个小部件，最后一个小部件用于填充所有剩余空间。</span></span>
+Column(
+  children: &lt;Widget&gt;[
+    Text(<span class="hljs-string">'Deliver features faster'</span>),
+    Text(<span class="hljs-string">'Craft beautiful UIs'</span>),
+    Expanded(
+      child: FittedBox(
+        fit: BoxFit.contain, <span class="hljs-comment">// otherwise the logo will be tiny</span>
+        child: <span class="hljs-keyword">const</span> FlutterLogo(),
+      ),
+    ),
+  ],
+)
+</div></code></pre>
+<h2 id="4-Image-%E7%BB%84%E4%BB%B6">4. Image 组件</h2>
+<p><em><strong>说明</strong></em>：创建图片的组件</p>
+<p><em><strong>介绍</strong></em>：</p>
+<ul>
+<li>支持以下图像格式：<code>JPEG</code>，<code>PNG</code>，<code>GIF</code>，<code>GIF</code>，<code>WebP</code>，<code>BMP</code> 和 <code>WBMP</code>。</li>
+<li>提供了几种可用于指定图像的方法的构造函数：
+<ul>
+<li><code>new Image</code>，用于从 <code>ImageProvider</code> 获得图像。</li>
+<li><code>new Image.asset</code>，用于从 <code>资源目录</code> 显示图片。</li>
+<li><code>new Image.network</code>，用于从 <code>URL</code> 获取图像（获取网路图片）。</li>
+<li><code>new Image.file</code>，用于从 <code>File</code> 获取图像。</li>
+<li><code>new Image.memory</code>，用于从 <code>Uint8List（内存）</code> 获取图像。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-dart"><div><span class="hljs-comment">// 资源图片</span>
+<span class="hljs-keyword">new</span> Image.asset(<span class="hljs-string">'imgs/logo.jpeg'</span>),
+<span class="hljs-comment">//网络图片</span>
+<span class="hljs-keyword">new</span> Image.network(
+    <span class="hljs-string">'https://flutter.io/images/homepage/header-illustration.png'</span>),
+<span class="hljs-comment">// 本地文件图片</span>
+<span class="hljs-keyword">new</span> Image.file(<span class="hljs-keyword">new</span> File(<span class="hljs-string">"/Users/gs/Downloads/1.jpeg"</span>)),
+<span class="hljs-comment">// Uint8List 图片</span>
+<span class="hljs-keyword">new</span> Image.memory(bytes),
+<span class="hljs-comment">//使用 ImageProvider 加载图片</span>
+<span class="hljs-keyword">new</span> Image(image: <span class="hljs-keyword">new</span> NetworkImage(<span class="hljs-string">"https://flutter.io/images/homepage/screenshot-2.png"</span>))
+</div></code></pre>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> Image({
+  <span class="hljs-comment">// 类似 react 组件中的 key</span>
+  Key key; 
+  <span class="hljs-comment">// 要显示的图像。</span>
+  ImageProvider&lt;<span class="hljs-keyword">dynamic</span>&gt; image;
+  <span class="hljs-comment">// 负责创建代表该图像的窗口小部件</span>
+  Widget <span class="hljs-built_in">Function</span>(BuildContext, Widget, <span class="hljs-built_in">int</span>, <span class="hljs-built_in">bool</span>) frameBuilder;
+  <span class="hljs-comment">// 用于指定图像仍在加载时向用户显示的小部件</span>
+  Widget <span class="hljs-built_in">Function</span>(BuildContext, Widget, ImageChunkEvent) loadingBuilder;
+  <span class="hljs-comment">// 图像的语义描述，用于向Andoid上的TalkBack和iOS上的VoiceOver提供图像描述。(talkback是一款由谷歌官方开发的系统软件,它的定位是帮助盲人或者视力有障碍的用户提供语言辅助；Voiceover功能是APPLE公司在2009年4月新推出的一种语音辅助程序。)</span>
+  <span class="hljs-built_in">String</span> semanticLabel; 
+  <span class="hljs-comment">// 是否启用图像的语义描述</span>
+  <span class="hljs-built_in">bool</span> excludeFromSemantics = <span class="hljs-keyword">false</span>; 
+  <span class="hljs-comment">// 图片的宽</span>
+  <span class="hljs-built_in">double</span> width; 
+  <span class="hljs-comment">// 图片的宽</span>
+  <span class="hljs-built_in">double</span> height; 
+  <span class="hljs-comment">// 图片的混合色值</span>
+  Color color; 
+  <span class="hljs-comment">// 如果为非 null，则使用 colorBlendMode 将此颜色与每个图像像素混合</span>
+  BlendMode colorBlendMode;
+  <span class="hljs-comment">// 图片的混合色值</span>
+  BoxFit fit; 
+  <span class="hljs-comment">// 对其方式，默认为居中</span>
+  AlignmentGeometry alignment = Alignment.center;
+  <span class="hljs-comment">// 重复方式，默认不重复</span>
+  ImageRepeat repeat = ImageRepeat.noRepeat; 
+  <span class="hljs-comment">// 九片图像的中心切片</span>
+  Rect centerSlice;
+  <span class="hljs-comment">// 是否在 TextDirection 的方向上绘制图像，默认为 false。if true，那么在TextDirection.ltr 上下文中，将在左上角绘制图像（图像的“正常”绘制方向）; 在 TextDirection.rtl 上下文中，图像将在水平方向上以缩放因子 -1 绘制，以便原点位于右上角</span>
+  <span class="hljs-built_in">bool</span> matchTextDirection = <span class="hljs-keyword">false</span>;
+  <span class="hljs-comment">// 当图像提供者发生变化时，是继续显示旧图像，默认不显示</span>
+  <span class="hljs-built_in">bool</span> gaplessPlayback = <span class="hljs-keyword">false</span>;  
+  <span class="hljs-comment">// 图像过滤器的质量级别。(渲染模式的质量)</span>
+  FilterQuality filterQuality = FilterQuality.low;
+})
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 默认构造函数可以与任何 ImageProvider 一起使用，例如 NetworkImage，以显示来自互联网的图像。</span></span>
+<span class="hljs-keyword">const</span> Image(
+  image: NetworkImage(<span class="hljs-string">'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'</span>),
+)
+
+<span class="hljs-comment"><span class="markdown">/// 在此示例中，使用 Image.network 构造函数显示来自Internet的图像。</span></span>
+Image.network(<span class="hljs-string">'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'</span>)
+</div></code></pre>
+<h2 id="5-Text-%E7%BB%84%E4%BB%B6%E7%B1%BB%E4%BC%BC%E4%BA%8E-p">5. Text 组件（类似于 &lt;p&gt;）</h2>
+<p><em><strong>说明</strong></em>：该 <code>widget</code> 可让创建一个带格式的文本。</p>
+<p><em><strong>介绍</strong></em>：<code>Text 组件</code> 显示一个样式单一的文本字符串。根据布局约束，字符串可能跨多行显示，也可能全部显示在同一行上。</p>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> Text(
+    <span class="hljs-built_in">String</span> data; <span class="hljs-comment">// 要显示的文本</span>
+    {
+        Key key; <span class="hljs-comment">// 类似于 react 组件中的 key </span>
+        TextStyle style； <span class="hljs-comment">// 文本样式</span>
+        StrutStyle strutStyle; <span class="hljs-comment">// 支撑样式</span>
+        TextAlign textAlign; <span class="hljs-comment">// 对齐方式</span>
+        TextDirection textDirection; <span class="hljs-comment">// 文本显示的方向</span>
+        Locale locale; <span class="hljs-comment">// 设置语言环境，就是国际化，多语言支持</span>
+        <span class="hljs-built_in">bool</span> softWrap; <span class="hljs-comment">// 文本是否应该在换行符处断行 </span>
+        TextOverflow overflow; <span class="hljs-comment">// 用来处理文本溢出</span>
+        <span class="hljs-built_in">double</span> textScaleFactor; <span class="hljs-comment">// 每个逻辑像素的字体像素值</span>
+        <span class="hljs-built_in">int</span> maxLines; <span class="hljs-comment">// 显示文本的最大行数</span>
+        <span class="hljs-built_in">String</span> semanticsLabel; <span class="hljs-comment">// 该文本的另一种语义标签</span>
+        TextWidthBasis textWidthBasis; <span class="hljs-comment">// 设置空值</span>
+    }
+)
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 这个例子展示了如何使用文本小部件显示文本。如果文本溢出，则使用省略号截断文本。</span></span>
+Text(
+    <span class="hljs-string">'Hello, <span class="hljs-subst">$_name</span>! How are you?'</span>,
+    textAlign: TextAlign.center,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(fontWeight: FontWeight.bold),
+)
+</div></code></pre>
+<h3 id="51-TextSpan%E7%BB%84%E4%BB%B6%E7%B1%BB%E4%BC%BC%E4%BA%8E-span"><em><strong>5.1 TextSpan组件（类似于 &lt;span&gt;）</strong></em></h3>
+<p><em><strong>说明</strong></em>：类似于 <code>html</code> 中的 <code>span</code>，将文字放在一行。</p>
+<p><em><strong>介绍</strong></em>：<code>TextSpan</code> 需要套一层 <code>Text.rich</code>，可以有 <code>children</code>，<code>children</code> 同为 <code>TextSpan</code>，可以分别加不同的样式，这里只能加样式，不可以加其他的属性。</p>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> TextSpan({
+    <span class="hljs-built_in">String</span> text; <span class="hljs-comment">// 要显示的内容</span>
+    <span class="hljs-built_in">List</span> children; <span class="hljs-comment">// 子部件，同为 TextSpan</span>
+    TextStyle style; <span class="hljs-comment">// 要应用于此范围内的 TextStyle 样式</span>
+    GestureRecognizer recognizer; <span class="hljs-comment">// 一个手势识别器，它将接收达到此范围的事件。</span>
+    <span class="hljs-built_in">String</span> semanticsLabel; <span class="hljs-comment">// 此 TextSpan 的替代语义标签</span>
+})
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 使用 Text.rich 构造函数，文本小部件可以显示具有不同样式 textspan 的段落。下面的示例为每个单词显示不同样式的“Hello beautiful world”。</span></span>
+<span class="hljs-keyword">const</span> Text.rich(
+ TextSpan(
+   text: <span class="hljs-string">'Hello'</span>, <span class="hljs-comment">// default text style</span>
+   children: &lt;TextSpan&gt;[
+     TextSpan(text: <span class="hljs-string">' beautiful '</span>, style: TextStyle(fontStyle: FontStyle.italic)),
+     TextSpan(text: <span class="hljs-string">'world'</span>, style: TextStyle(fontWeight: FontWeight.bold)),
+   ],
+ ),
+)
+</div></code></pre>
+<h2 id="6-Icon-%E7%BB%84%E4%BB%B6">6. Icon 组件</h2>
+<p><em><strong>说明</strong></em>：<code>Icon</code> 通常是由 <code>WidgetsApp</code> 或 <code>MaterialApp</code> 自动引入的。</p>
+<p><em><strong>介绍</strong></em>：<code>Flutter</code> 中，可以像 <code>Web</code> 开发一样使用 <code>iconfont</code>，<code>iconfont</code> 即“字体图标”，它是将图标做成字体文件，然后通过指定不同的字符而显示不同的图片。</p>
+<p><em><strong>优点</strong></em>：</p>
+<blockquote>
+<p>在 <code>Flutter</code> 开发中，<code>iconfont</code> 和 <code>图片</code> 相比有如下优势：</p>
+</blockquote>
+<ul>
+<li><em><strong>体积小</strong></em>：可以减小安装包大小。</li>
+<li><em><strong>矢量的</strong></em>：<code>iconfont</code> 都是矢量图标，放大不会影响其清晰度。</li>
+<li><em><strong>可以应用文本样式</strong></em>：可以像文本一样改变字体图标的颜色、大小对齐等。</li>
+<li><em><strong>可以通过 <code>TextSpan</code> 和 <code>文本</code> 混用</strong></em>。</li>
+</ul>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> Icon(
+  IconData icon; <span class="hljs-comment">// 显示的图标。图标可以为 null，在这种情况下，组件将呈现为指定大小的空白区域。</span>
+  {
+    Key key; <span class="hljs-comment">// 类似 react 组件中的 key </span>
+    <span class="hljs-built_in">double</span> size; <span class="hljs-comment">// 图标的大小，以逻辑像素为单位。</span>
+    Color color; <span class="hljs-comment">// 绘制图标时使用的颜色。</span>
+    <span class="hljs-built_in">String</span> semanticLabel; <span class="hljs-comment">// 图标的语义标签。</span>
+    TextDirection textDirection; <span class="hljs-comment">// 用于呈现图标的文本方向。</span>
+  }
+)
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 本示例说明如何创建不同颜色和大小的 Icon。</span></span>
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  children: <span class="hljs-keyword">const</span> &lt;Widget&gt;[
+    Icon(
+      Icons.favorite,
+      color: Colors.pink,
+      size: <span class="hljs-number">24.0</span>,
+      semanticLabel: <span class="hljs-string">'Text to announce in accessibility modes'</span>,
+    ),
+    Icon(
+      Icons.audiotrack,
+      color: Colors.green,
+      size: <span class="hljs-number">30.0</span>,
+    ),
+    Icon(
+      Icons.beach_access,
+      color: Colors.blue,
+      size: <span class="hljs-number">36.0</span>,
+    ),
+  ],
+)
+</div></code></pre>
+<h2 id="7-RaisedButton-%E7%BB%84%E4%BB%B6">7. RaisedButton 组件</h2>
+<p><em><strong>说明</strong></em>：<code>Material Design</code> 中的 <code>button</code>， 一个凸起的材质矩形按钮。</p>
+<p><em><strong>介绍</strong></em>：<code>RaisedButton</code> 基于 <code>Material Design</code>， 当按下该按钮时，其 <code>Material.elevation（相对于其父项放置此按钮的z坐标。）</code> 会增加。</p>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> RaisedButton({
+  <span class="hljs-comment">// 类似于 react 组件中的 key</span>
+  Key key; 
+  <span class="hljs-comment">// 轻击或激活按钮时调用的回调。如果将其设置为 null，则该按钮将被禁用。</span>
+  <span class="hljs-keyword">void</span> <span class="hljs-built_in">Function</span>() onPressed; 
+  <span class="hljs-comment">// 水波纹高亮变化回调</span>
+  <span class="hljs-keyword">void</span> <span class="hljs-built_in">Function</span>(<span class="hljs-built_in">bool</span>) onHighlightChanged; 
+  <span class="hljs-comment">// 定义按钮的基本颜色，以及按钮的最小尺寸，内部填充和形状的默认值。默认为 ButtonTheme.of(context).textTheme。</span>
+  ButtonTextTheme textTheme; 
+  <span class="hljs-comment">// 用于此按钮的文字颜色。</span>
+  Color textColor; 
+  <span class="hljs-comment">// 按钮被禁用时的文字颜色。</span>
+  Color disabledTextColor; 
+  <span class="hljs-comment">// 按钮的颜色。</span>
+  Color color; 
+  <span class="hljs-comment">// 按钮被禁用时的颜色  </span>
+  Color disabledColor; 
+  <span class="hljs-comment">// 当按钮具有输入焦点时的颜色。</span>
+  Color focusColor; 
+  <span class="hljs-comment">// 当指针悬停在按钮上时的颜色。</span>
+  Color hoverColor; 
+  <span class="hljs-comment">// 按钮的水波纹亮起的颜色</span>
+  Color highlightColor; 
+  <span class="hljs-comment">// 水波纹的颜色</span>
+  Color splashColor; 
+  <span class="hljs-comment">// 按钮主题高亮</span>
+  Brightness colorBrightness; 
+  <span class="hljs-comment">// 按钮下面的阴影长度</span>
+  <span class="hljs-built_in">double</span> elevation; 
+  <span class="hljs-comment">// 启用按钮并具有输入焦点时，按钮下面的阴影长度。</span>
+  <span class="hljs-built_in">double</span> focusElevation; 
+  <span class="hljs-comment">// 启用按钮且指针悬停在其上方时，按钮下面的阴影长度。</span>
+  <span class="hljs-built_in">double</span> hoverElevation; 
+  <span class="hljs-comment">// 按钮高亮时的下面的阴影长度</span>
+  <span class="hljs-built_in">double</span> highlightElevation; 
+  <span class="hljs-comment">// 未启用按钮时，按钮下面的阴影长度。</span>
+  <span class="hljs-built_in">double</span> disabledElevation; 
+  <span class="hljs-comment">// 按钮内部的 padding</span>
+  EdgeInsetsGeometry padding; 
+  <span class="hljs-comment">// 按钮的形状</span>
+  ShapeBorder shape; 
+  <span class="hljs-comment">// 根据此选项，内容将被裁剪（或不裁剪）。</span>
+  Clip clipBehavior; 
+  <span class="hljs-comment">// 一个可选的焦点节点，用作此组件的焦点节点。</span>
+  FocusNode focusNode; 
+  <span class="hljs-comment">// 如果当前未将其范围内的其他节点作为焦点，则将此组件选择为初始焦点时为True。</span>
+  <span class="hljs-built_in">bool</span> autofocus = <span class="hljs-keyword">false</span>; 
+  <span class="hljs-comment">// 配置点击目标的最小大小。</span>
+  MaterialTapTargetSize materialTapTargetSize; 
+  <span class="hljs-comment">// 定义动画的持续时间。</span>
+  <span class="hljs-built_in">Duration</span> animationDuration; 
+  <span class="hljs-comment">// 子组件</span>
+  Widget child;
+})
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 此示例演示如何渲染具有禁用背景的 RaisedButton，已启用的RaisedButton 和 最后一个带有渐变背景的 RaisedButton。</span></span>
+Widget build(BuildContext context) {
+  <span class="hljs-keyword">return</span> Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: &lt;Widget&gt;[
+        <span class="hljs-keyword">const</span> RaisedButton(
+          onPressed: <span class="hljs-keyword">null</span>,
+          child: Text(
+            <span class="hljs-string">'Disabled Button'</span>,
+            style: TextStyle(fontSize: <span class="hljs-number">20</span>)
+          ),
+        ),
+        <span class="hljs-keyword">const</span> SizedBox(height: <span class="hljs-number">30</span>),
+        RaisedButton(
+          onPressed: () {},
+          child: <span class="hljs-keyword">const</span> Text(
+            <span class="hljs-string">'Enabled Button'</span>,
+            style: TextStyle(fontSize: <span class="hljs-number">20</span>)
+          ),
+        ),
+        <span class="hljs-keyword">const</span> SizedBox(height: <span class="hljs-number">30</span>),
+        RaisedButton(
+          onPressed: () {},
+          textColor: Colors.white,
+          padding: <span class="hljs-keyword">const</span> EdgeInsets.all(<span class="hljs-number">0.0</span>),
+          child: Container(
+            decoration: <span class="hljs-keyword">const</span> BoxDecoration(
+              gradient: LinearGradient(
+                colors: &lt;Color&gt;[
+                  Color(<span class="hljs-number">0xFF0D47A1</span>),
+                  Color(<span class="hljs-number">0xFF1976D2</span>),
+                  Color(<span class="hljs-number">0xFF42A5F5</span>),
+                ],
+              ),
+            ),
+            padding: <span class="hljs-keyword">const</span> EdgeInsets.all(<span class="hljs-number">10.0</span>),
+            child: <span class="hljs-keyword">const</span> Text(
+              <span class="hljs-string">'Gradient Button'</span>,
+              style: TextStyle(fontSize: <span class="hljs-number">20</span>)
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+</div></code></pre>
+<h2 id="8-Scaffold-%E7%BB%84%E4%BB%B6">8. Scaffold 组件</h2>
+<p><em><strong>说明</strong></em>：<code>Scaffold</code> 是一个路由页的骨架，我们使用它可以很容易地拼装出一个完整的页面。</p>
+<p><em><strong>介绍</strong></em>：一个完整的路由页可能会包含 <code>导航栏</code>、<code>抽屉菜单(Drawer)</code> 以及底部 <code>Tab导航菜单</code> 等。<code>Scaffold</code> 实现了基本的 <code>Material Design</code> 布局结构。在 <code>Material</code> 设计中定义的单个界面上的各种布局元素，在 <code>Scaffold</code> 中都支持。</p>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> Scaffold({
+  <span class="hljs-comment">// 类似于 react 组件中的 key</span>
+  Key key; 
+  <span class="hljs-comment">// AppBar 是一个 Material 风格的导航栏，通过它可以设置导航栏标题、导航栏菜单、导航栏底部的 Tab标题等。</span>
+  PreferredSizeWidget appBar; 
+  <span class="hljs-comment">// 主体内容区域，显示在 appBar 的下方</span>
+  Widget body; 
+  <span class="hljs-comment">// 悬浮按钮</span>
+  Widget floatingActionButton; 
+  <span class="hljs-comment">// 悬浮按钮位置，默认在右下方</span>
+  FloatingActionButtonLocation floatingActionButtonLocation; 
+  <span class="hljs-comment">// 悬浮按钮动画</span>
+  FloatingActionButtonAnimator floatingActionButtonAnimator;
+  <span class="hljs-comment">// 固定在下方显示的按钮，比如对话框下方的确定、取消按钮</span>
+  <span class="hljs-built_in">List</span>&lt;Widget&gt; persistentFooterButtons; 
+  <span class="hljs-comment">// 侧滑菜单左</span>
+  Widget drawer; 
+  <span class="hljs-comment">// 侧滑菜单右</span>
+  Widget endDrawer; 
+  <span class="hljs-comment">// 底部导航</span>
+  Widget bottomNavigationBar; 
+  <span class="hljs-comment">// 底部持久化提示框</span>
+  Widget bottomSheet; 
+  <span class="hljs-comment">// 内容的背景颜色，默认使用的是 ThemeData.scaffoldBackgroundColor 的值</span>
+  Color backgroundColor; 
+  <span class="hljs-comment">// 控制界面内容 body 是否重新布局来避免底部被覆盖了，比如当键盘显示的时候，重新布局避免被键盘盖住内容。默认值为 true。</span>
+  <span class="hljs-built_in">bool</span> resizeToAvoidBottomPadding; 
+  <span class="hljs-comment">// 重新计算布局空间大小</span>
+  <span class="hljs-built_in">bool</span> resizeToAvoidBottomInset; 
+  <span class="hljs-comment">// 是否显示到底部，默认为 true，将显示到顶部状态栏</span>
+  <span class="hljs-built_in">bool</span> primary = <span class="hljs-keyword">true</span>; 
+  <span class="hljs-comment">// 处理拖动行为的方式，如果设置为 DragStartBehavior.start，则将在检测到拖动手势时开始。如果设置为 DragStartBehavior.down，将在首次检测到 down事件时开始。</span>
+  DragStartBehavior drawerDragStartBehavior = DragStartBehavior.start;
+  <span class="hljs-comment">// 如果为 true，并且指定了 bottomNavigationBar 或 persistentFooterButtons，则body 将延伸到 Scaffold 的底部，而不是仅延伸到 bottomNavigationBar 或   persistentFooterButtons 的顶部 </span>
+  <span class="hljs-built_in">bool</span> extendBody = <span class="hljs-keyword">false</span>; 
+  <span class="hljs-comment">// 打开侧边栏时，遮罩层的颜色</span>
+  Color drawerScrimColor; 
+  <span class="hljs-comment">// 打开侧边栏的区域的宽度</span>
+  <span class="hljs-built_in">double</span> drawerEdgeDragWidth;
+})
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 此示例显示了具有 body 和 FloatingActionButton 的 Scaffold。</span></span>
+<span class="hljs-built_in">int</span> _count = <span class="hljs-number">0</span>;
+
+Widget build(BuildContext context) {
+  <span class="hljs-keyword">return</span> Scaffold(
+    appBar: AppBar(
+      title: <span class="hljs-keyword">const</span> Text(<span class="hljs-string">'Sample Code'</span>),
+    ),
+    body: Center(
+      child: Text(<span class="hljs-string">'You have pressed the button <span class="hljs-subst">$_count</span> times.'</span>)
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () =&gt; setState(() =&gt; _count++),
+      tooltip: <span class="hljs-string">'Increment Counter'</span>,
+      child: <span class="hljs-keyword">const</span> Icon(Icons.add),
+    ),
+  );
+}
+
+<span class="hljs-comment"><span class="markdown">/// 此示例显示了一个具有 backgroundColor，body 和 FloatingActionButton 的 Scaffold。</span></span>
+<span class="hljs-built_in">int</span> _count = <span class="hljs-number">0</span>;
+
+Widget build(BuildContext context) {
+  <span class="hljs-keyword">return</span> Scaffold(
+    appBar: AppBar(
+      title: <span class="hljs-keyword">const</span> Text(<span class="hljs-string">'Sample Code'</span>),
+    ),
+    body: Center(
+      child: Text(<span class="hljs-string">'You have pressed the button <span class="hljs-subst">$_count</span> times.'</span>)
+    ),
+    backgroundColor: Colors.blueGrey.shade200,
+    floatingActionButton: FloatingActionButton(
+      onPressed: () =&gt; setState(() =&gt; _count++),
+      tooltip: <span class="hljs-string">'Increment Counter'</span>,
+      child: <span class="hljs-keyword">const</span> Icon(Icons.add),
+    ),
+  );
+}
+
+<span class="hljs-comment"><span class="markdown">/// 此示例显示了一个具有 AppBar，BottomAppBar 和 FloatingActionButton 的 Scaffold。</span></span>
+<span class="hljs-built_in">int</span> _count = <span class="hljs-number">0</span>;
+
+Widget build(BuildContext context) {
+  <span class="hljs-keyword">return</span> Scaffold(
+    appBar: AppBar(
+      title: Text(<span class="hljs-string">'Sample Code'</span>),
+    ),
+    body: Center(
+      child: Text(<span class="hljs-string">'You have pressed the button <span class="hljs-subst">$_count</span> times.'</span>),
+    ),
+    bottomNavigationBar: BottomAppBar(
+      shape: <span class="hljs-keyword">const</span> CircularNotchedRectangle(),
+      child: Container(height: <span class="hljs-number">50.0</span>,),
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () =&gt; setState(() {
+        _count++;
+      }),
+      tooltip: <span class="hljs-string">'Increment Counter'</span>,
+      child: Icon(Icons.add),
+    ),
+    floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+  );
+}
+</div></code></pre>
+<h2 id="9-Appbar-%E7%BB%84%E4%BB%B6">9. Appbar 组件</h2>
+<p><em><strong>说明</strong></em>：<code>AppBar</code>通常用在 <code>Scaffold.appBar</code> 属性中，该属性将导航栏作为固定高度的组件放置在屏幕顶部。</p>
+<ul>
+<li><strong>图片展示及布局</strong></li>
+</ul>
+<p><img src="file:////Users/wangxq02/Desktop/flutter-widget-intro/.gitbook/assets/app_bar.png" alt=""></p>
+<p><em><strong>介绍</strong></em>：<code>AppBar</code> 是一个 <code>Material</code> 风格的导航栏，通过它可以设置 <code>导航栏标题</code>、<code>导航栏菜单</code>、<code>导航栏底部的Tab标题</code> 等。</p>
+<p><em><strong>属性</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-keyword">const</span> AppBar({
+  <span class="hljs-comment">// 类似于 react 组件中的 key</span>
+  Key key;
+  <span class="hljs-comment">// 导航栏最左侧 Widget，常见为抽屉菜单按钮或返回按钮。</span>
+  Widget leading;
+  <span class="hljs-comment">// 如果 leading 为 null，是否自动实现默认的 leading 按钮</span>
+  <span class="hljs-built_in">bool</span> automaticallyImplyLeading = <span class="hljs-keyword">true</span>;
+  <span class="hljs-comment">// 页面标题</span>
+  Widget title;
+  <span class="hljs-comment">// 导航栏右侧菜单</span>
+  <span class="hljs-built_in">List</span>&lt;Widget&gt; actions;
+  <span class="hljs-comment">// 一个显示在 AppBar 下方的控件，高度和 AppBar 高度一样，可以实现一些特殊的效果，该属性通常在 SliverAppBar 中使用。</span>
+  Widget flexibleSpace;
+  <span class="hljs-comment">// 导航栏底部菜单，通常为Tab按钮组</span>
+  PreferredSizeWidget bottom;
+  <span class="hljs-comment">// 导航栏阴影</span>
+  <span class="hljs-built_in">double</span> elevation;
+  <span class="hljs-comment">// Material 的形状和阴影</span>
+  ShapeBorder shape;
+  <span class="hljs-comment">// 背景颜色</span>
+  Color backgroundColor;
+  <span class="hljs-comment">// 状态栏的深度 有白色和黑色两种主题，用来改变时间，wi-fi，电量显示的颜色</span>
+  Brightness brightness;
+  <span class="hljs-comment">// 导航栏图标的颜色，不透明度和大小。</span>
+  IconThemeData iconTheme;
+  <span class="hljs-comment">// 导航栏操作中显示的图标的颜色，不透明度和大小。</span>
+  IconThemeData actionsIconTheme;
+  <span class="hljs-comment">// 导航中文本的样式。通常与亮度 backgroundColor，iconTheme 一起设置。</span>
+  TextTheme textTheme;
+  <span class="hljs-comment">// 此导航栏是否显示在屏幕顶部。默认为 true。</span>
+  <span class="hljs-built_in">bool</span> primary = <span class="hljs-keyword">true</span>;
+  <span class="hljs-comment">// 标题是否应该居中。</span>
+  <span class="hljs-built_in">bool</span> centerTitle;
+  <span class="hljs-comment">// flexibleSpace 和 title 的距离 默认是重合的</span>
+  <span class="hljs-built_in">double</span> titleSpacing = NavigationToolbar.kMiddleSpacing;
+  <span class="hljs-comment">// 导航栏的透明度</span>
+  <span class="hljs-built_in">double</span> toolbarOpacity = <span class="hljs-number">1.0</span>;
+  <span class="hljs-comment">// 底部导航栏的透明度</span>
+  <span class="hljs-built_in">double</span> bottomOpacity = <span class="hljs-number">1.0</span>;
+})
+</div></code></pre>
+<p><em><strong>例子</strong></em>：</p>
+<pre><code class="language-dart"><div><span class="hljs-comment"><span class="markdown">/// 此示例显示一个带有两个简单操作的 AppBar。第一个动作打开 SnackBar，第二个动作导航到新页面。</span></span>
+<span class="hljs-keyword">final</span> GlobalKey&lt;ScaffoldState&gt; scaffoldKey = GlobalKey&lt;ScaffoldState&gt;();
+<span class="hljs-keyword">final</span> SnackBar snackBar = <span class="hljs-keyword">const</span> SnackBar(content: Text(<span class="hljs-string">'Showing Snackbar'</span>));
+
+<span class="hljs-keyword">void</span> openPage(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(
+    builder: (BuildContext context) {
+      <span class="hljs-keyword">return</span> Scaffold(
+        appBar: AppBar(
+          title: <span class="hljs-keyword">const</span> Text(<span class="hljs-string">'Next page'</span>),
+        ),
+        body: <span class="hljs-keyword">const</span> Center(
+          child: Text(
+            <span class="hljs-string">'This is the next page'</span>,
+            style: TextStyle(fontSize: <span class="hljs-number">24</span>),
+          ),
+        ),
+      );
+    },
+  ));
+}
+
+<span class="hljs-comment">// ...</span>
+
+Widget build(BuildContext context) {
+  <span class="hljs-keyword">return</span> Scaffold(
+    key: scaffoldKey,
+    appBar: AppBar(
+      title: <span class="hljs-keyword">const</span> Text(<span class="hljs-string">'AppBar Demo'</span>),
+      actions: &lt;Widget&gt;[
+        IconButton(
+          icon: <span class="hljs-keyword">const</span> Icon(Icons.add_alert),
+          tooltip: <span class="hljs-string">'Show Snackbar'</span>,
+          onPressed: () {
+            scaffoldKey.currentState.showSnackBar(snackBar);
+          },
+        ),
+        IconButton(
+          icon: <span class="hljs-keyword">const</span> Icon(Icons.navigate_next),
+          tooltip: <span class="hljs-string">'Next page'</span>,
+          onPressed: () {
+            openPage(context);
+          },
+        ),
+      ],
+    ),
+    body: <span class="hljs-keyword">const</span> Center(
+      child: Text(
+        <span class="hljs-string">'This is the home page'</span>,
+        style: TextStyle(fontSize: <span class="hljs-number">24</span>),
+      ),
+    ),
+  );
+}
+</div></code></pre>
+<h2 id="10-FlutterLogo-%E7%BB%84%E4%BB%B6">10. FlutterLogo 组件</h2>
+<h2 id="11-Placeholder-%E7%BB%84%E4%BB%B6">11. Placeholder 组件</h2>
+
+    </body>
+    </html>
