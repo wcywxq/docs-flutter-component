@@ -4,7 +4,7 @@ description: flutter中最基本的组件
 
 # 基础组件
 
-## **1. Container 组件** <a id="2-row-zu-jian"></a>
+## **1. Container 组件**
 
 _**说明**_： 由于 `Container` 组合了许多其他小部件，每个小部件都具有自己的布局行为，因此 `Container` 的布局行为有些复杂。
 
