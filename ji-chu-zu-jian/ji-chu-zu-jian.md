@@ -760,7 +760,6 @@ FlutterLogo(
   style: FlutterLogoStyle.horizontal, 
   curve: Curves.bounceIn,
 )
-
 ```
 
 ## 11. Placeholder 组件
